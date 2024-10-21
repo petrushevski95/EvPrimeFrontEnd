@@ -3,11 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Objects;
-
-public class SliderMenu {
-
-    private final WebDriver driver;
+public class SliderMenu extends BasePage{
 
     private final By sliderMenu = By.xpath("//button[contains(@class, 'MuiIconButton-root')]");
     private final By homeButtonTextSliderMenu = By.xpath("//*[@id=\"root\"]/div/div[1]/div/div/div/ul/li[1]/div/div[2]/span");
@@ -21,77 +17,71 @@ public class SliderMenu {
     private final By loginButton = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/ul/li[4]");
 
     public SliderMenu(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void clickSliderMenuButton() {
-        driver.findElement(sliderMenu).click();
+        clickElement(sliderMenu);
     }
 
     public boolean isHomeButtonTextDisplayed() {
-       return driver.findElement(homeButtonTextSliderMenu).getText().equals("Home");
+       return isDisplayed(homeButtonTextSliderMenu);
     }
 
     public boolean isEventsButtonTextDisplayed() {
-        return driver.findElement(eventsButtonTextSliderMenu).getText().equals("Events");
+       return isDisplayed(eventsButtonTextSliderMenu);
     }
 
     public boolean isContactButtonTextDisplayed() {
-        return driver.findElement(contactButtonTextSliderMenu).getText().equals("Contact");
+        return isDisplayed(contactButtonTextSliderMenu);
     }
 
     public boolean isLoginButtonTextDisplayed() {
-        return driver.findElement(loginButtonTextSliderMenu).getText().equals("Login");
+        return isDisplayed(loginButtonTextSliderMenu);
     }
 
     public void closeSliderMenu() {
-        driver.findElement(sliderMenuButton).click();
+        clickElement(sliderMenuButton);
     }
 
     public boolean isSliderMenuDisplayed () {
-        return driver.findElement(loginButtonTextSliderMenu).getText().equals("Login");
+        return isDisplayed(loginButtonTextSliderMenu);
     }
 
     public void goToEventsPage() {
-        driver.get("http://localhost:3000/events");
+        goTo("http://localhost:3000/events");
     }
 
     public void clickHomeButton() {
-        driver.findElement(homeButton).click();
+        clickElement(homeButton);
     }
 
     public boolean isOnTheHomePage() {
-       return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/");
+       return isOnThePage("http://localhost:3000/");
     }
 
     public void clickEventsButton() {
-        driver.findElement(eventsButton).click();
+        clickElement(eventsButton);
     }
 
     public boolean isOnTheEventsPage() {
-        return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/events");
+        return isOnThePage("http://localhost:3000/events");
     }
 
     public void clickContactButton () {
-        driver.findElement(contactButton).click();
+        clickElement(contactButton);
     }
 
     public boolean isOnTheContactPage() {
-        return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/contact");
+        return isOnThePage("http://localhost:3000/contact");
     }
 
     public void clickLoginButton() {
-        driver.findElement(loginButton).click();
+        clickElement(loginButton);
     }
 
     public boolean isOnTheLoginPage() {
-        return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/auth?mode=login");
+        return isOnThePage("http://localhost:3000/auth?mode=login");
     }
-
-
-
-
-
-
 
 }
