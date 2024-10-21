@@ -1,92 +1,106 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.Objects;
 
-public class SignUpPage {
+public class SignUpPage extends BasePage {
 
-    private final WebDriver driver;
-
-    private final By createUserButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[2]/button");
+    private final By createUserButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[2]"); // Example locator
     private final By emailLocator = By.name("email");
     private final By passwordLocator = By.name("password");
     private final By goButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[1]");
-    private final By createNewUserText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[1]");
-    private final By hoverButton = By.xpath("//*[@id=\"root\"]/div/div[2]/button");
+    private final By createNewUserText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[2]");
     private final By invalidEmailMessageText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/ul/li");
     private final By invalidPasswordMessageText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/ul/li[2]");
     private final By existingEmailMessageText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/ul/li");
     private final By invalidPasswordValidMailMessageText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/ul/li");
-    private final By loginButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[2]");
+    private final By loginButton = By.xpath("//button[text()='Log In']");
+    private final By userValidationErrorMessage = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/span");
+    private final By loginTitlePageText = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[1]");
 
     public SignUpPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void clickCreateUserButton() {
-        driver.findElement(createUserButton).click();
+        clickElement(createUserButton);
     }
 
     public void enterEmail(String value) {
-        driver.findElement(emailLocator).sendKeys(value);
+        sendKeysToElement(emailLocator, value);
     }
 
     public void enterPassword(String value) {
-        driver.findElement(passwordLocator).sendKeys(value);
+        sendKeysToElement(passwordLocator, value);
     }
 
     public void clickGoButton() {
-        driver.findElement(goButton).click();
+        clickElement(goButton);
     }
 
     public boolean isOnTheHomePage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-        wait.until(ExpectedConditions.urlToBe("http://localhost:3000/"));
-        return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/");
+        return waitForUrlToBe("http://localhost:3000/", Duration.ofSeconds(1));
     }
 
     public boolean isSignUpFormDisplayed() {
-            {try {return driver.findElement(createNewUserText).isDisplayed();
-            } catch (NoSuchElementException e) {
-                return false;
-            }
-            }
-        }
-
-    public boolean isHoverButtonDisplayed () {
-        return driver.findElement(hoverButton).isDisplayed();
+        return isDisplayed(createNewUserText);
     }
 
     public String invalidEmailMessageText() {
-        return driver.findElement(invalidEmailMessageText).getText();
+        return getText(invalidEmailMessageText);
     }
 
     public String invalidPasswordMessageText() {
-        return driver.findElement(invalidPasswordMessageText).getText();
+        return getText(invalidPasswordMessageText);
     }
 
     public String existingEmailMessageText() {
-        return driver.findElement(existingEmailMessageText).getText();
+        return getText(existingEmailMessageText);
     }
 
     public String invalidPasswordValidMailText() {
-        return driver.findElement(invalidPasswordValidMailMessageText).getText();
+        return getText(invalidPasswordValidMailMessageText);
     }
 
     public void clickLogInButton() {
-        driver.findElement(loginButton).click();
+        waitForVisibility(loginButton,Duration.ofSeconds(1)).click();
     }
 
     public boolean isOnTheLoginPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-        wait.until(ExpectedConditions.urlToBe("http://localhost:3000/auth?mode=login"));
-        return Objects.equals(driver.getCurrentUrl(), "http://localhost:3000/auth?mode=login");
+        return waitForUrlToBe("http://localhost:3000/auth?mode=login", Duration.ofSeconds(1));
     }
 
+    public String userValidationErrorMessageText() {
+        return getText(userValidationErrorMessage);
+    }
+
+    public boolean isInvalidEmailMessageDisplayed() {
+        return isDisplayed(invalidEmailMessageText);
+    }
+
+    public boolean isUserValidationErrorMessageDisplayed() {
+        return isDisplayed(userValidationErrorMessage);
+    }
+
+    public boolean isInvalidPasswordMessageDisplayed() {
+        return isDisplayed(invalidPasswordMessageText);
+    }
+
+    public boolean isExistingEmailMessageDisplayed() {
+        return isDisplayed(existingEmailMessageText);
+    }
+
+    public boolean isInvalidPasswordValidMailMessageDisplayed() {
+        return isDisplayed(invalidPasswordValidMailMessageText);
+    }
+
+    public String getLoginButtonText() {
+        return getText(createUserButton);
+    }
+
+    public String loginUserTitleTextPage() {
+        return getText(loginTitlePageText);
+    }
 }
+
