@@ -3,8 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import java.time.Duration;
+
+import static utils.UrlConfig.LOGIN_PAGE_URL;
+import static utils.UrlConfig.SIGNUP_PAGE_URL;
 
 public class LoginPage extends BasePage {
 
@@ -41,7 +43,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isOnTheHomePage() {
-        return waitForUrlToBe("http://localhost:3000/", Duration.ofSeconds(1));
+        return waitForUrlToBe(LOGIN_PAGE_URL, Duration.ofSeconds(1));
     }
 
     public boolean isSignUpFormDisplayed() {
@@ -88,7 +90,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isOnTheSignUpPage() {
-        return isOnThePage("http://localhost:3000/auth?mode=signup");
+        return isOnThePage(SIGNUP_PAGE_URL);
     }
 }
 

@@ -1,9 +1,8 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -54,6 +53,35 @@ public abstract class BasePage {
         new WebDriverWait(driver, duration).until(ExpectedConditions.urlToBe(url));
         return Objects.equals(driver.getCurrentUrl(), url);
     }
+
+    protected String getColor(By locator, String value) {
+        Color color = Color.fromString(driver.findElement(locator).getCssValue(value));
+        return color.asHex();
+    }
+
+    protected String getPseudoElementBorderColorAsHex(By locator, String cssProperty) {
+        waitForVisibility(locator, Duration.ofSeconds(2));
+        if (locator != null) {
+            // Find the element using the locator
+            WebElement element = driver.findElement(locator);
+            // Execute JavaScript to get the specified CSS property of the ::after pseudo-element
+            String script = "return window.getComputedStyle(arguments[0], '::after')." + cssProperty + ";";
+            String pseudoElementColor = (String) ((JavascriptExecutor) driver).executeScript(script, element);
+            // Convert the color to hex format
+            Color color = Color.fromString(pseudoElementColor);
+            return color.asHex();
+        } else {
+            throw new IllegalArgumentException("The provided locator is null.");
+        }
+    }
+
+    protected void hoverOverElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
+
+
 }
 
 
