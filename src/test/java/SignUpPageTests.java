@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 import pages.SignUpPage;
 import static org.junit.Assert.*;
+import static utils.UrlConfig.BASE_URL;
 
 
 public class SignUpPageTests {
@@ -21,7 +22,7 @@ public class SignUpPageTests {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.get("http://localhost:3000/");
+        driver.get(BASE_URL);
 
         loginPage = new LoginPage(driver);
         loginPage.clickLoginButton();

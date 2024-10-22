@@ -7,6 +7,7 @@ import pages.SliderMenu;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static utils.UrlConfig.BASE_URL;
 
 public class SliderMenuTests {
 
@@ -18,7 +19,7 @@ public class SliderMenuTests {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.get("http://localhost:3000/");
+        driver.get(BASE_URL);
 
         sliderMenu = new SliderMenu(driver);
     }

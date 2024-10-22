@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static utils.UrlConfig.*;
+
 public class SliderMenu extends BasePage{
 
     private final By sliderMenu = By.xpath("//button[contains(@class, 'MuiIconButton-root')]");
@@ -49,7 +51,7 @@ public class SliderMenu extends BasePage{
     }
 
     public void goToEventsPage() {
-        goTo("http://localhost:3000/events");
+        goTo(EVENTS_PAGE_URL);
     }
 
     public void clickHomeButton() {
@@ -57,7 +59,7 @@ public class SliderMenu extends BasePage{
     }
 
     public boolean isOnTheHomePage() {
-       return isOnThePage("http://localhost:3000/");
+       return isOnThePage(BASE_URL);
     }
 
     public void clickEventsButton() {
@@ -65,7 +67,7 @@ public class SliderMenu extends BasePage{
     }
 
     public boolean isOnTheEventsPage() {
-        return isOnThePage("http://localhost:3000/events");
+        return isOnThePage(EVENTS_PAGE_URL);
     }
 
     public void clickContactButton () {
@@ -73,7 +75,7 @@ public class SliderMenu extends BasePage{
     }
 
     public boolean isOnTheContactPage() {
-        return isOnThePage("http://localhost:3000/contact");
+        return isOnThePage(CONTACT_PAGE_URL);
     }
 
     public void clickLoginButton() {
@@ -81,7 +83,7 @@ public class SliderMenu extends BasePage{
     }
 
     public boolean isOnTheLoginPage() {
-        return isOnThePage("http://localhost:3000/auth?mode=login");
+        return isOnThePage(LOGIN_PAGE_URL);
     }
 
 }

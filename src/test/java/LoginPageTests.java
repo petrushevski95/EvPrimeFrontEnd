@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 
 import static org.junit.Assert.*;
+import static utils.UrlConfig.BASE_URL;
 
 public class LoginPageTests {
 
@@ -18,7 +19,7 @@ public class LoginPageTests {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.get("http://localhost:3000/");
+        driver.get(BASE_URL);
 
 //        signUpPage = new SignUpPage(driver);
 //        signUpPage.enterEmail(RandomStringUtils.randomAlphanumeric(8) + "mail.com");
@@ -69,7 +70,6 @@ public class LoginPageTests {
         assertEquals("LOG IN",loginPage.getCreateUserButtonText());
         assertEquals("Create new user",loginPage.createNewUserTitlePageText());
         assertTrue(loginPage.isOnTheSignUpPage());
-
     }
 
 

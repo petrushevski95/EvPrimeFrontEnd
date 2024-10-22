@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 
+import static utils.UrlConfig.BASE_URL;
+import static utils.UrlConfig.LOGIN_PAGE_URL;
+
 public class SignUpPage extends BasePage {
 
     private final By createUserButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/div/div/form/div/div[4]/div[2]"); // Example locator
@@ -40,7 +43,7 @@ public class SignUpPage extends BasePage {
     }
 
     public boolean isOnTheHomePage() {
-        return waitForUrlToBe("http://localhost:3000/", Duration.ofSeconds(1));
+        return waitForUrlToBe(BASE_URL, Duration.ofSeconds(1));
     }
 
     public boolean isSignUpFormDisplayed() {
@@ -68,7 +71,7 @@ public class SignUpPage extends BasePage {
     }
 
     public boolean isOnTheLoginPage() {
-        return waitForUrlToBe("http://localhost:3000/auth?mode=login", Duration.ofSeconds(1));
+        return waitForUrlToBe(LOGIN_PAGE_URL, Duration.ofSeconds(1));
     }
 
     public String userValidationErrorMessageText() {
