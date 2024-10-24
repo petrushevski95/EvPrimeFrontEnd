@@ -25,7 +25,7 @@ public class ContactPageTests {
     }
 
     @After
-    public void closeDriver() {
+    public void closeDriver() { //cannot assert validation message
         driver.quit();
     }
 
@@ -36,10 +36,11 @@ public class ContactPageTests {
         contactPage.enterMessage("Test message");
         contactPage.clickSendButton();
         assertTrue(contactPage.isOnTheContactPage());
+
     }
 
     @Test
-    public void unsuccessfulReachOutEmptyFullNameFieldTest() {
+    public void unsuccessfulReachOutEmptyFullNameFieldTest() throws InterruptedException {
         contactPage.enterEmail("test@gmail.com");
         contactPage.enterMessage("Test message");
         contactPage.clickSendButton();
@@ -55,11 +56,19 @@ public class ContactPageTests {
     }
 
     @Test
-    public void unsuccessfulReachOutInvalidEmailTest() throws InterruptedException {
+    public void unsuccessfulReachOutInvalidEmailFormat1Test() throws InterruptedException {
         contactPage.enterFullName("Test full name");
         contactPage.enterEmail("testmail.com");
         contactPage.clickSendButton();
         assertEquals("#d32f2f",contactPage.getEmailBottomBorderColor());
+    }
+
+    @Test
+    public void unsuccessfulReachOutInvalidEmailFormat2Test() throws InterruptedException {
+        contactPage.enterFullName("Test full name");
+        contactPage.enterEmail("@mail.com");
+        contactPage.clickSendButton();
+        assertEquals("#304ffe",contactPage.getEmailBottomBorderColor());
     }
 
     @Test

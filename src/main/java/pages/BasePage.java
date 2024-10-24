@@ -5,8 +5,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class BasePage {
@@ -45,8 +45,12 @@ public abstract class BasePage {
         return driver.findElement(locator).getText();
     }
 
-    protected WebElement waitForVisibility(By locator, Duration duration) {
+    protected WebElement waitForVisibilityElement(By locator, Duration duration) {
         return new WebDriverWait(driver, duration).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected WebElement waitForInteractiveElement(By locator, Duration duration) {
+        return new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     protected boolean waitForUrlToBe(String url, Duration duration) {
@@ -54,13 +58,8 @@ public abstract class BasePage {
         return Objects.equals(driver.getCurrentUrl(), url);
     }
 
-    protected String getColor(By locator, String value) {
-        Color color = Color.fromString(driver.findElement(locator).getCssValue(value));
-        return color.asHex();
-    }
-
     protected String getPseudoElementBorderColorAsHex(By locator, String cssProperty) {
-        waitForVisibility(locator, Duration.ofSeconds(2));
+        waitForVisibilityElement(locator, Duration.ofSeconds(2));
         if (locator != null) {
             // Find the element using the locator
             WebElement element = driver.findElement(locator);
@@ -81,7 +80,29 @@ public abstract class BasePage {
         actions.moveToElement(element).perform();
     }
 
+    protected void clearField(By locator) {
+        WebElement field = driver.findElement(locator);
+        field.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        field.sendKeys(Keys.BACK_SPACE);
+    }
+
+    protected String getAttributes(By locator,String attribute) {
+       return driver.findElement(locator).getAttribute(attribute);
+    }
+
+    protected List<WebElement> returnElementsList(By locator){
+        return driver.findElements(locator);
+    }
+
+    protected void clickTheCenterOfTheElement(WebElement element){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element,0,0).click().build().perform();
+    }
 
 }
+
+
+
+
 
 

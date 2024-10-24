@@ -5,8 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 
-import static utils.UrlConfig.LOGIN_PAGE_URL;
-import static utils.UrlConfig.SIGNUP_PAGE_URL;
+import static utils.UrlConfig.*;
 
 public class LoginPage extends BasePage {
 
@@ -63,7 +62,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isInvalidEmailOrInvalidPasswordMessageDisplayed() {
-        try {return waitForVisibility(invalidPasswordOrEmailMessageText, Duration.ofSeconds(1)).isDisplayed();
+        try {return waitForVisibilityElement(invalidPasswordOrEmailMessageText, Duration.ofSeconds(1)).isDisplayed();
         } catch (NoSuchElementException e){
             return false;
         }

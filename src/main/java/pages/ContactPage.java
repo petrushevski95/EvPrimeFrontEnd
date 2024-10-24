@@ -8,7 +8,7 @@ import static utils.UrlConfig.CONTACT_PAGE_URL;
 public class ContactPage extends BasePage {
 
     private final By contactButton = By.xpath("//*[@id=\"root\"]/div/div/div/div/div/ul/li[3]");
-    private final By fullNameField = By.xpath("//div[contains(@class, 'MuiFormControl-root')]//input[@name='name']");
+    private final By fullNameField = By.xpath("//input[@name='name']");
     private final By emailField = By.xpath("//input[@name='email']");
     private final By messageField = By.xpath("//textarea[@name='description']");
     private final By sendButton = By.xpath("//*[@id=\"root\"]/div/div/main/div[2]/form/div[1]/button");
@@ -55,5 +55,4 @@ public class ContactPage extends BasePage {
     public String getMessageBottomBorderColor() {
         return getPseudoElementBorderColorAsHex(emptyMessageFieldBottomBorderColor,"borderBottomColor");
     }
-
 }
