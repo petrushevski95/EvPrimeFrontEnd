@@ -36,11 +36,12 @@ public class LoginPageTests {
     }
 
     @Test
-    public void successfulLoginTest() {
+    public void successfulLoginTest() throws InterruptedException {
         loginPage.enterEmail("test@gmail.com");
         loginPage.enterPassword("test123");
         loginPage.clickGoButton();
         assertTrue(loginPage.isOnTheHomePage());
+        Thread.sleep(500);
         assertFalse(loginPage.isSignUpFormDisplayed());
         assertTrue(loginPage.isHoverButtonDisplayed());
     }

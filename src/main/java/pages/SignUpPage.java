@@ -67,7 +67,7 @@ public class SignUpPage extends BasePage {
     }
 
     public void clickLogInButton() {
-        waitForVisibility(loginButton,Duration.ofSeconds(1)).click();
+        waitForVisibilityElement(loginButton,Duration.ofSeconds(1)).click();
     }
 
     public boolean isOnTheLoginPage() {
