@@ -5,28 +5,29 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
+import pages.SliderMenu;
 
 import static org.junit.Assert.*;
-import static utils.UrlConfig.BASE_URL;
 
 public class LoginPageTests {
 
     private WebDriver driver;
     private LoginPage loginPage;
+    private SliderMenu sliderMenu;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
-        driver.get(BASE_URL);
+        loginPage = new LoginPage(driver);
+        sliderMenu = new SliderMenu(driver);
+        sliderMenu.goToHomePage();
 
 //        signUpPage = new SignUpPage(driver);
 //        signUpPage.enterEmail(RandomStringUtils.randomAlphanumeric(8) + "mail.com");
 //        signUpPage.enterPassword("test12345");
 //        signUpPage.clickGoButton();  this needs to happen before every test and deleted after executing the test (database do not recognize the registered users)
 
-        loginPage = new LoginPage(driver);
         loginPage.clickLoginButton();
     }
 
@@ -51,7 +52,7 @@ public class LoginPageTests {
         loginPage.enterEmail("testgmail.com");
         loginPage.enterPassword("test123");
         loginPage.clickGoButton();
-        assertEquals("Authentication failed.",loginPage.authenticationFailedMessage());
+        assertEquals("Authentication failed.", loginPage.authenticationFailedMessage());
     }
 
     @Test
@@ -60,20 +61,16 @@ public class LoginPageTests {
         loginPage.enterPassword("test12345");
         loginPage.clickGoButton();
         assertTrue(loginPage.isInvalidEmailOrInvalidPasswordMessageDisplayed());
-        assertEquals("Invalid email or password entered.",loginPage.invalidEmailOrInvalidPasswordMessageText());
+        assertEquals("Invalid email or password entered.", loginPage.invalidEmailOrInvalidPasswordMessageText());
         assertTrue(loginPage.isInvalidCredentialsMessageDisplayed());
-        assertEquals("Invalid credentials.",loginPage.invalidCredentialsMessageText());
+        assertEquals("Invalid credentials.", loginPage.invalidCredentialsMessageText());
     }
 
     @Test
     public void createUserButtonTest() {
         loginPage.clickCreateUserButton();
-        assertEquals("LOG IN",loginPage.getCreateUserButtonText());
-        assertEquals("Create new user",loginPage.createNewUserTitlePageText());
+        assertEquals("LOG IN", loginPage.getCreateUserButtonText());
+        assertEquals("Create new user", loginPage.createNewUserTitlePageText());
         assertTrue(loginPage.isOnTheSignUpPage());
     }
-
-
-
-
 }

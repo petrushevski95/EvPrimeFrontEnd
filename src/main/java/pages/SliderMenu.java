@@ -54,6 +54,10 @@ public class SliderMenu extends BasePage{
         goTo(EVENTS_PAGE_URL);
     }
 
+    public void goToHomePage() {
+        goTo(BASE_URL);
+    }
+
     public void clickHomeButton() {
         clickElement(homeButton);
     }

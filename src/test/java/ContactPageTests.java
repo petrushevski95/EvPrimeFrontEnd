@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 import static utils.UrlConfig.BASE_URL;
 
 public class ContactPageTests {
+    // CAN NOT ASSERT THE VALIDATION MESSAGES (CODE NOT OPTIMIZED)
 
     private WebDriver driver;
     private ContactPage contactPage;
